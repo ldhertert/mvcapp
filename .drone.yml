@@ -1,0 +1,23 @@
+kind: pipeline
+name: default
+
+steps:
+- name: build
+  image: plugins/docker
+  settings:
+    dry_run: true
+    repo: ldhertert/mvcapp
+  when:
+    event:
+    - push
+
+- name: push
+  image: plugins/docker
+  settings:
+    username: ldhertert
+    password: 
+      from_secret: docker_password
+    repo: ldhertert/mvcapp
+  when:
+    event:
+    - pull_request
