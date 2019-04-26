@@ -9,7 +9,7 @@ steps:
     repo: ldhertert/mvcapp
   when:
     event:
-    - push
+    - pull_request
 
 - name: push
   image: plugins/docker
@@ -20,4 +20,4 @@ steps:
     repo: ldhertert/mvcapp
   when:
     event:
-    - pull_request
+    - push
