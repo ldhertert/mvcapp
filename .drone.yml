@@ -10,6 +10,7 @@ steps:
   when:
     event:
     - pull_request
+    - push
 
 - name: push
   image: plugins/docker
@@ -18,7 +19,8 @@ steps:
     password: 
       from_secret: dockerhubpw
     repo: ldhertert/mvcapp
+    tag:
+    - $$COMMIT
   when:
     event:
-    - push
     - custom
