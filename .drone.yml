@@ -21,7 +21,7 @@ steps:
     repo: ldhertert/mvcapp
     tag:
     - latest
-    - $$COMMIT
+    - ${DRONE_COMMIT_SHA:0:8}
   when:
     event:
     - custom
