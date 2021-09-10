@@ -26,6 +26,15 @@ pipeline:
                   execution:
                       steps:
                           - step:
+                                type: Run
+                                name: git testing
+                                identifier: git_testing
+                                spec:
+                                    connectorRef: luke_docker_hub
+                                    image: alpine/git:latest
+                                    command: git status
+                                    privileged: false
+                          - step:
                                 type: Plugin
                                 name: Build docker image
                                 identifier: Build_docker_image
@@ -37,4 +46,8 @@ pipeline:
                                         dry_run: "true"
                                         repo: ldhertert/mvcapp
                                     imagePullPolicy: IfNotPresent
+                                when:
+                                    stageStatus: Success
+                                    condition: <+pipeline.name> == “success”
+                                failureStrategies: []
               variables: []
