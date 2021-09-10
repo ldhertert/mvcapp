@@ -12,6 +12,15 @@ pipeline:
                       steps:
                           - step:
                                 type: Run
+                                name: test
+                                identifier: test
+                                spec:
+                                    connectorRef: luke_docker_hub
+                                    image: alpine:latest
+                                    command: env
+                                    privileged: false
+                          - step:
+                                type: Run
                                 spec:
                                     privileged: false
                                     image: alpine/git:latest
@@ -88,6 +97,7 @@ pipeline:
                   cloneCodebase: true
               name: Build
               identifier: build
+              variables: []
     properties:
         ci:
             codebase:
