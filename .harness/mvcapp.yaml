@@ -33,9 +33,11 @@ pipeline:
                                     connectorRef: luke_docker_hub
                                     image: alpine/git:latest
                                     command: |-
-                                        echo "<+pipeline.name>"
+                                        echo "<+pipeline.name>" > output.txt
                                         git status
-                                        git pull origin master
+                                        git add .
+                                        git commit -m "Add new file"
+                                        git push origin master
                                     privileged: false
                           - step:
                                 type: Plugin
