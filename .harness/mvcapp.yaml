@@ -97,7 +97,10 @@ pipeline:
                   cloneCodebase: true
               name: Build
               identifier: build
-              variables: []
+              variables:
+                  - name: testing_env
+                    type: String
+                    value: fdadsfdsdfs
     properties:
         ci:
             codebase:
