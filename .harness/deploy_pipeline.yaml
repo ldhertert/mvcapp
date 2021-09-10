@@ -50,7 +50,7 @@ pipeline:
                                       type: DockerRegistry
                                       spec:
                                           connectorRef: luke_docker_hub
-                                          imagePath: library/nginx
+                                          imagePath: nginx
                                           tag: <+input>
                   infrastructure:
                       environmentRef: dev
