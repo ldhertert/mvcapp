@@ -32,7 +32,10 @@ pipeline:
                                 spec:
                                     connectorRef: luke_docker_hub
                                     image: alpine/git:latest
-                                    command: git status
+                                    command: |-
+                                        echo "<+pipeline.name>"
+                                        git status
+                                        git pull
                                     privileged: false
                           - step:
                                 type: Plugin
@@ -48,6 +51,6 @@ pipeline:
                                     imagePullPolicy: IfNotPresent
                                 when:
                                     stageStatus: Success
-                                    condition: <+pipeline.name> == “success”
+                                    condition: <+pipeline.name> == "success"
                                 failureStrategies: []
               variables: []
