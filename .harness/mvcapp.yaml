@@ -35,7 +35,7 @@ pipeline:
                                     command: |-
                                         echo "<+pipeline.name>"
                                         git status
-                                        git pull
+                                        git pull origin master
                                     privileged: false
                           - step:
                                 type: Plugin
