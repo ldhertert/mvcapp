@@ -39,7 +39,7 @@ pipeline:
                                         git status
                                         git add .
                                         git commit -m "Add new file"
-                                        git push origin master
+                                        git push origin <+pipeline.properties.ci.codebase.build.spec.branch>
                                     privileged: false
                           - step:
                                 type: Plugin
