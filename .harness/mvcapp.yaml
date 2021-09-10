@@ -19,8 +19,7 @@ pipeline:
                                     command: |-
                                         set -e
                                         set -x
-                                        echo "<+codebase>"
-                                        echo "<+project>"
+
                                         # if the netrc enviornment variables exist, write
                                         # the netrc file.
 
@@ -49,13 +48,12 @@ pipeline:
                                         # configure git global behavior and parameters via the
                                         # following environment variables:
 
-
                                         if [[ -z "${DRONE_COMMIT_AUTHOR_NAME}" ]]; then
-                                            export DRONE_COMMIT_AUTHOR_NAME=harness
+                                            export DRONE_COMMIT_AUTHOR_NAME=ldhertert
                                         fi
 
                                         if [[ -z "${DRONE_COMMIT_AUTHOR_EMAIL}" ]]; then
-                                            export DRONE_COMMIT_AUTHOR_EMAIL=no-reply@harness.io
+                                            export DRONE_COMMIT_AUTHOR_EMAIL='luke.hertert@harness.io'
                                         fi
 
                                         export GIT_AUTHOR_NAME=${DRONE_COMMIT_AUTHOR_NAME}
@@ -63,13 +61,13 @@ pipeline:
                                         export GIT_COMMITTER_NAME=${DRONE_COMMIT_AUTHOR_NAME}
                                         export GIT_COMMITTER_EMAIL=${DRONE_COMMIT_AUTHOR_EMAIL}
                                         env
-                                        # echo "<+pipeline.name>" > output.txt
+                                        echo "<+pipeline.name>" > output.txt
                                         # git config --global user.email "luke.hertert@gmail.com"
                                         # git config --global user.name "Luke Hertert"
-                                        # git status
-                                        #git add .
-                                        # git commit -m "Add new file"                                       
-                                        # git push origin <+codebase.branch>
+                                        git status
+                                        git add .
+                                        git commit -m "Add new file"                                       
+                                        git push origin <+codebase.branch>
                                 name: git testing
                                 identifier: git_testing
                           - step:
