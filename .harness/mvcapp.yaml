@@ -1,41 +1,26 @@
 pipeline:
-    name: mvcapp
-    identifier: mvcapp
-    projectIdentifier: luke
-    orgIdentifier: default
-    tags: {}
-    properties:
-        ci:
-            codebase:
-                connectorRef: luke_github
-                repoName: mvcapp
-                build: <+input>
     stages:
         - stage:
-              name: Build
-              identifier: build
-              description: ""
               type: CI
               spec:
-                  cloneCodebase: true
                   infrastructure:
                       type: KubernetesDirect
                       spec:
-                          connectorRef: minikube
                           namespace: ci
+                          connectorRef: minikube
                   execution:
                       steps:
                           - step:
                                 type: Run
-                                name: git testing
-                                identifier: git_testing
                                 spec:
-                                    connectorRef: luke_docker_hub
+                                    privileged: false
                                     image: alpine/git:latest
+                                    connectorRef: luke_docker_hub
                                     command: |-
                                         set -e
                                         set -x
                                         echo "<+codebase>"
+                                        echo "<+pipeline.properties.ci>"
                                         # if the netrc enviornment variables exist, write
                                         # the netrc file.
 
@@ -85,21 +70,33 @@ pipeline:
                                         #git add .
                                         # git commit -m "Add new file"                                       
                                         # git push origin <+codebase.branch>
-                                    privileged: false
+                                name: git testing
+                                identifier: git_testing
                           - step:
-                                type: Plugin
-                                name: Build docker image
-                                identifier: Build_docker_image
-                                spec:
-                                    connectorRef: luke_docker_hub
-                                    image: plugins/docker
-                                    privileged: false
-                                    settings:
-                                        dry_run: "true"
-                                        repo: ldhertert/mvcapp
-                                    imagePullPolicy: IfNotPresent
                                 when:
                                     stageStatus: Success
                                     condition: <+pipeline.name> == "success"
-                                failureStrategies: []
-              variables: []
+                                type: Plugin
+                                spec:
+                                    settings:
+                                        repo: ldhertert/mvcapp
+                                        dry_run: "true"
+                                    privileged: false
+                                    imagePullPolicy: IfNotPresent
+                                    image: plugins/docker
+                                    connectorRef: luke_docker_hub
+                                name: Build docker image
+                                identifier: Build_docker_image
+                  cloneCodebase: true
+              name: Build
+              identifier: build
+    properties:
+        ci:
+            codebase:
+                repoName: mvcapp
+                connectorRef: luke_github
+                build: <+input>
+    projectIdentifier: luke
+    orgIdentifier: default
+    name: mvcapp
+    identifier: mvcapp
