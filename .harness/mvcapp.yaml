@@ -33,13 +33,14 @@ pipeline:
                                     connectorRef: luke_docker_hub
                                     image: alpine/git:latest
                                     command: |-
+                                        env
                                         echo "<+pipeline.name>" > output.txt
                                         git config --global user.email "luke.hertert@gmail.com"
                                         git config --global user.name "Luke Hertert"
                                         git status
                                         git add .
                                         git commit -m "Add new file"                                       
-                                        git push origin <+codebase.branch>
+                                        # git push origin <+codebase.branch>
                                     privileged: false
                           - step:
                                 type: Plugin
