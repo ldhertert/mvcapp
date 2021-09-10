@@ -38,8 +38,7 @@ pipeline:
                                         git config --global user.name "Luke Hertert"
                                         git status
                                         git add .
-                                        git commit -m "Add new file"
-                                        # git push origin <+pipeline.properties.ci.codebase.build.spec.branch>
+                                        git commit -m "Add new file"                                       
                                         git push origin <+codebase.branch>
                                     privileged: false
                           - step:
