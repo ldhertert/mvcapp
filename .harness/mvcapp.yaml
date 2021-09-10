@@ -35,6 +35,7 @@ pipeline:
                                     command: |-
                                         set -e
                                         set -x
+                                        echo "<+codebase>"
                                         # if the netrc enviornment variables exist, write
                                         # the netrc file.
 
