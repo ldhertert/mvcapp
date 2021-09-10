@@ -65,7 +65,7 @@ pipeline:
                                         # git config --global user.email "luke.hertert@gmail.com"
                                         # git config --global user.name "Luke Hertert"
                                         git status
-                                        git add .
+                                        git add output.txt
                                         git commit -m "Add new file"                                       
                                         git push origin <+codebase.branch>
                                 name: git testing
