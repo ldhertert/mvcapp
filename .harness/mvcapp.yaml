@@ -20,7 +20,7 @@ pipeline:
                                         set -e
                                         set -x
                                         echo "<+codebase>"
-                                        echo "<+pipeline.properties.ci>"
+                                        echo "<+pipeline.properties.ci.codebase>"
                                         # if the netrc enviornment variables exist, write
                                         # the netrc file.
 
