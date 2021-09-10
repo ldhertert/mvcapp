@@ -20,7 +20,7 @@ pipeline:
                                         set -e
                                         set -x
                                         echo "<+codebase>"
-                                        echo "<+project.luke_github>"
+                                        echo "<+project>"
                                         # if the netrc enviornment variables exist, write
                                         # the netrc file.
 
